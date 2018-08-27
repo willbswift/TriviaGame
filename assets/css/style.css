@@ -1,7 +1,8 @@
 html {
 	background-color: black;
 	background-image: url("../images/background.jpg");   */
-    width: 1200px;
+    width: 1000px;
+    background-position: center;
     -webkit-background-size: cover;
   	-moz-background-size: cover;
   	-o-background-size: cover;

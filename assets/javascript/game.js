@@ -4,6 +4,59 @@
   //load display
 $(document).ready(function() {
 
+  //estabilish questions as objects
+let allQuestions = [question1, question2, question3];
+
+let question1 = {
+  question: "Who represented Humanity when they made first contact with the Vulcans?",
+  aChoice: "Doctor Zefram Cochrane",
+  bChoice: "Colonel Phillip Green",
+  cChoice: "Doctor Henry Archer",
+  dChoice: "Doctor Emory Erickson",
+  correct: "aChoice"
+}; 
+
+let question1 = {
+  question: "Which Human was key to arranging an alliance between the Vulcans and the Andorians?",
+  aChoice: "Admiral Maxwell Forrest",
+  bChoice: "Captain Jonathan Beckett Archer",
+  cChoice: "Captain Jean-Luc Picard",
+  dChoice: "Captain Erika Hernandez",
+  correct: "bChoice"
+}; 
+
+let question1 = {
+  question: "What year was the United Federation of Planets founded in?",
+  aChoice: "2161 CE",
+  bChoice: "2155 CE",
+  cChoice: "2063 CE",
+  dChoice: "2256 CE",
+  correct: "aChoice"
+}; 
+
+//create loop to present each question and answers in turn
+//create a function to select each question and present it
+function nextQuestion () {
+  let randomQuestion = Math.floor(Math.random() * (allQuestions.length));
+  document.getElementById("question").innerHTML = alliance[randomQuestion];
+}
+
+  $('.group').hide();
+  $('#option1').show();
+  $('#selectMe').change(function () {
+    $('.group').hide();
+    $('#'+$(this).val()).show();
+  })
+});
+
+
+// create code to present Success pic or Failure pic and advance to next question
+//create timer for each question
+//create core to present 'out of time' if that event occurs
+
+
+
+/*
     $(".sabrepic").hide();
     $(".sabrebroke").hide();
     $(".unbuilt").show();
@@ -146,5 +199,8 @@ $(document).ready(function() {
   }
 })
 
+*/
 }
+
+
 );
