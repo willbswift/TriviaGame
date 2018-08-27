@@ -1,0 +1,91 @@
+html {
+	background-color: black;
+	background-image: url("../images/background.jpg");   */
+    width: 1200px;
+    -webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+  	background-repeat: no-repeat;
+  	margin-top: 0rem;
+	color: white;
+	font-family: arial, sans-serif;
+	font-size: 1.2rem;
+	font-weight: bolder;
+	text-shadow: 0 0 5px black;
+}
+
+* {
+    box-sizing: border-box;
+}
+body {
+  	width: 95%;
+	margin: 1rem auto;
+	margin-top: 0;
+	max-width: 1280px;
+	display: block;
+	text-align: center;
+}
+
+header {
+	margin-bottom: 5px;
+}
+h1 {
+	margin: .5rem;
+}
+
+h2 {
+	margin: .5rem;
+}
+
+img {
+	height: 200px;
+	width: auto;
+	border: solid 4px #91FBFD;
+	border-radius: 20px;
+}
+.crystal {
+	height: 200px;
+	width: 100px;
+	border: solid 4px #91FBFD;
+	border-radius: 20px;
+}
+
+main {
+
+}
+
+.sabrepic {
+	background-image: url("../images/sabrebuild.gif"); 
+	height: 20rem;
+	width: auto;
+	padding-top: 4rem;
+	font-size: 1.2rem;
+	background-repeat: no-repeat;
+	background-position: center; 
+}
+
+.sabrebroke {
+	background-image: url("../images/sabrebroke.png"); 
+	height: 20rem;
+	width: auto;
+	padding-top: 4rem;
+	font-size: 1.2rem;
+	background-repeat: no-repeat;
+	background-position: center; 
+}
+
+article {
+
+}
+
+
+.instructions {
+	background-color: #33928D;
+	border: solid 4px #91FBFD;
+	border-radius: 20px;
+}
+
+
+
+
