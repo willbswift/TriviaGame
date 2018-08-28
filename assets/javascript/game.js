@@ -1,4 +1,4 @@
-  //load display
+  //load stuff
 $(document).ready(function() {
 
   //establish questions as objects
@@ -39,7 +39,6 @@ let question3 = {
 }; 
 
   //establish variables
-
 let allQuestions = [question0, question1, question2, question3];
 let questionAnswered = false;
 let correctAnswers = 0;
@@ -47,34 +46,35 @@ let wrongAnswers = 0;
 
   //  Variable that will hold our setInterval that runs the timer
 let intervalId;
-
   // prevents the timer from being sped up unnecessarily
 let clockRunning = false;
 
+  //code to start master timer
   // Our timer object
 let timer = {
   time: 120,
 
+    // Use setInterval to start the count here and set the clock to running.
   start: function() {
-    // DONE: Use setInterval to start the count here and set the clock to running.
+      // Use setInterval to start the count here and set the clock to running.
     if (!clockRunning) {
-      intervalId = setInterval(stopwatch.count, 1000);
+      intervalId = setInterval(timer.count, 1000);
       clockRunning = true;
     }
   },
   stop: function() {
-    // DONE: Use clearInterval to stop the count here and set the clock to not be running.
+    // Use clearInterval to stop the count here and set the clock to not be running.
     clearInterval(intervalId);
     clockRunning = false;
   },
   count: function() {
-    // DONE: increment time by 1, remember we cant use "this" here.
+    // increment time by 1, remember we cant use "this" here.
     timer.time--;
-    // DONE: Get the current time, pass that into the stopwatch.timeConverter function,
+    // Get the current time, pass that into the stopwatch.timeConverter function,
     //       and save the result in a variable.
     let converted = timer.timeConverter(timer.time);
     console.log(converted);
-    // DONE: Use the variable we just created to show the converted time in the "display" div.
+    // Use the variable we just created to show the converted time in the "display" div.
     $("#timer").text(converted);
   },
   timeConverter: function(t) {
@@ -93,13 +93,14 @@ let timer = {
   }
 };
 
-
+  //game reset code
 function initializeGame() {
-    //code to allow questions to be picked
+    //code to allow answers to be picked
   questionAnswered = false;
   correctAnswers = 0;
   wrongAnswers = 0;
   timer.time = 120;
+  $(timer.start);    
   $("#timer").text("02:00");
   $(".answer").show();
   $(".score").hide();
@@ -113,6 +114,7 @@ function initializeGame() {
     }
 }
 
+  //start game (over)
 initializeGame();
 
 //**create loop to present each question and answers in turn
@@ -139,16 +141,15 @@ i=3;
   correctChoice = allQuestions[i].correct;
   console.log(correctChoice);
 
-  //code to start master timer
-  // DONE: Use setInterval to start the count here and set the clock to running.
-
-
 $('.answer').bind('click', function (evt) {
     $(".timesup").hide();
     $(".status").hide();
     $(".failure").hide();
     $(".success").hide();
+    clockRunning = true;
+    //$(timer.start);    
 
+//if (questionAnswered = false) {
   if ($(this).val() === correctChoice) {
     console.log("Correct!");
 
@@ -192,6 +193,7 @@ $('.answer').bind('click', function (evt) {
       //"Time is the fire in which we burn."
     //code for duration
     //code to start next question.  
+
 
   //code to show final score when all questions have been dealt with.
     $(".score").show();
