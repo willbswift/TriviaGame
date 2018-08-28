@@ -4,10 +4,12 @@
   //load display
 $(document).ready(function() {
 
-  //estabilish questions as objects
-let allQuestions = [question1, question2, question3];
+  //establish variables
+  let correctAnswers = 0;
+  let wrongAnswers = 0;
 
-let question1 = {
+  //establish questions as objects
+let question0 = {
   question: "Who represented Humanity when they made first contact with the Vulcans?",
   aChoice: "Doctor Zefram Cochrane",
   bChoice: "Colonel Phillip Green",
@@ -25,7 +27,7 @@ let question1 = {
   correct: "bChoice"
 }; 
 
-let question1 = {
+let question2 = {
   question: "What year was the United Federation of Planets founded in?",
   aChoice: "2161 CE",
   bChoice: "2155 CE",
@@ -34,21 +36,73 @@ let question1 = {
   correct: "aChoice"
 }; 
 
+let question3 = {
+  question: "What battle started the first Federation-Klingon war?",
+  aChoice: "Battle of Vulcanis",
+  bChoice: "Battle of Organia",
+  cChoice: "Battle of T'Kuvma",
+  dChoice: "Battle of the Binary Stars",
+  correct: "dChoice"
+}; 
+
+let allQuestions = [question0, question1, question2, question3];
+
 //create loop to present each question and answers in turn
+
+i=2;
+  currentQuestion = allQuestions[i].question;
+    console.log(currentQuestion);
+  $("#question").html(currentQuestion);
+  currentAChoice = allQuestions[i].aChoice;
+    console.log(currentAChoice);
+  $("#aChoice").html(currentAChoice);
+  currentBChoice = allQuestions[i].bChoice;
+    console.log(currentBChoice);
+  $("#bChoice").html(currentBChoice);
+  currentCChoice = allQuestions[i].cChoice;
+    console.log(currentCChoice);
+  $("#cChoice").html(currentCChoice);
+  currentDChoice = allQuestions[i].dChoice;
+    console.log(currentDChoice);
+  $("#dChoice").html(currentDChoice);
+
+  correctChoice = allQuestions[i].correct;
+  console.log(correctChoice);
+
+$('.answer').bind('click', function (evt) {
+  if ($(this).val() == correctChoice) {
+    console.log("Correct!");
+    correctAnswers = correctAnswers +1;
+    $(".status").text("Correct! A Starfleet Officer's first duty is to the truth!");
+  }
+  else {
+    wrongAnswers = wrongAnswers +1;
+    console.log("loser!");
+    $(".status").text("Wong! Insufficient facts always invite danger.");
+  }
+
+  console.log(correctAnswers);
+  console.log(wrongAnswers);
+
+//make code so you can't answer more then once.
+//"Time is the fire in which we burn."
+
+
+})
+
+
+
 //create a function to select each question and present it
+
+
+/*
 function nextQuestion () {
   let randomQuestion = Math.floor(Math.random() * (allQuestions.length));
   document.getElementById("question").innerHTML = alliance[randomQuestion];
 }
 
-  $('.group').hide();
-  $('#option1').show();
-  $('#selectMe').change(function () {
-    $('.group').hide();
-    $('#'+$(this).val()).show();
-  })
-});
 
+*/
 
 // create code to present Success pic or Failure pic and advance to next question
 //create timer for each question
