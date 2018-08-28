@@ -1,12 +1,5 @@
-
-//There will be four crystals displayed as buttons on the page.
-
   //load display
 $(document).ready(function() {
-
-  //establish variables
-  let correctAnswers = 0;
-  let wrongAnswers = 0;
 
   //establish questions as objects
 let question0 = {
@@ -45,11 +38,88 @@ let question3 = {
   correct: "dChoice"
 }; 
 
+  //establish variables
+
 let allQuestions = [question0, question1, question2, question3];
+let questionAnswered = false;
+let correctAnswers = 0;
+let wrongAnswers = 0;
 
-//create loop to present each question and answers in turn
+  //  Variable that will hold our setInterval that runs the timer
+let intervalId;
 
-i=2;
+  // prevents the timer from being sped up unnecessarily
+let clockRunning = false;
+
+  // Our timer object
+let timer = {
+  time: 120,
+
+  start: function() {
+    // DONE: Use setInterval to start the count here and set the clock to running.
+    if (!clockRunning) {
+      intervalId = setInterval(stopwatch.count, 1000);
+      clockRunning = true;
+    }
+  },
+  stop: function() {
+    // DONE: Use clearInterval to stop the count here and set the clock to not be running.
+    clearInterval(intervalId);
+    clockRunning = false;
+  },
+  count: function() {
+    // DONE: increment time by 1, remember we cant use "this" here.
+    timer.time--;
+    // DONE: Get the current time, pass that into the stopwatch.timeConverter function,
+    //       and save the result in a variable.
+    let converted = timer.timeConverter(timer.time);
+    console.log(converted);
+    // DONE: Use the variable we just created to show the converted time in the "display" div.
+    $("#timer").text(converted);
+  },
+  timeConverter: function(t) {
+    let minutes = Math.floor(t / 60);
+    let seconds = t - (minutes * 60);
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+    if (minutes === 0) {
+      minutes = "00";
+    }
+    else if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+    return minutes + ":" + seconds;
+  }
+};
+
+
+function initializeGame() {
+    //code to allow questions to be picked
+  questionAnswered = false;
+  correctAnswers = 0;
+  wrongAnswers = 0;
+  timer.time = 120;
+  $("#timer").text("02:00");
+  $(".answer").show();
+  $(".score").hide();
+  $(".timesup").hide();
+  $(".status").hide();
+  $(".failure").hide();
+  $(".success").hide();
+  if (!clockRunning) {
+    intervalId = setInterval(timer.count, 1000);
+      clockRunning = true;
+    }
+}
+
+initializeGame();
+
+//**create loop to present each question and answers in turn
+//**create a function to select each question and present it
+
+i=3;
+
   currentQuestion = allQuestions[i].question;
     console.log(currentQuestion);
   $("#question").html(currentQuestion);
@@ -69,30 +139,80 @@ i=2;
   correctChoice = allQuestions[i].correct;
   console.log(correctChoice);
 
+  //code to start master timer
+  // DONE: Use setInterval to start the count here and set the clock to running.
+
+
 $('.answer').bind('click', function (evt) {
-  if ($(this).val() == correctChoice) {
+    $(".timesup").hide();
+    $(".status").hide();
+    $(".failure").hide();
+    $(".success").hide();
+
+  if ($(this).val() === correctChoice) {
     console.log("Correct!");
+
+    $(timer.stop);    
+
+    clockRunning = false;
     correctAnswers = correctAnswers +1;
-    $(".status").text("Correct! A Starfleet Officer's first duty is to the truth!");
+    $(".status").html("Correct! A Starfleet Officer's first duty is to the truth!");
+    $(".success").show();
+      //code to prevent more questions being picked
+    questionAnswered = true;
+
+    //code for duration
+    //code to activate next question
   }
   else {
     wrongAnswers = wrongAnswers +1;
     console.log("loser!");
-    $(".status").text("Wong! Insufficient facts always invite danger.");
+    $(timer.stop);    
+    clockRunning = false;
+    $(".answer").hide();
+    if ($(".answer").val() === correctChoice) {
+
+    }
+
+    $(".status").html("Wrong! Insufficient facts always invite danger.");
+    $(".failure").show();
+      //code to prevent more questions being picked
+    questionAnswered = true;
+
+    //code for duration
+    //code to activate next question
   }
+  //code to end slide if question isn't answered.  
+      //code to prevent more questions being picked
+    questionAnswered = true;
+    $(timer.stop);
+    clockRunning = false;
+    //code to present 'times up' pic
+      $(".timesup").show();
+      //"Time is the fire in which we burn."
+    //code for duration
+    //code to start next question.  
+
+  //code to show final score when all questions have been dealt with.
+    $(".score").show();
+    $(".timesup").hide();
+    $(".status").hide();
+    $(".failure").hide();
+    $(".success").hide();
 
   console.log(correctAnswers);
   console.log(wrongAnswers);
+    $(".score").html("Correct Answers: " + correctAnswers + "<br>Wrong Answers: " + wrongAnswers);
 
-//make code so you can't answer more then once.
-//"Time is the fire in which we burn."
-
+  //code to reset game
+  document.onkeyup = function(event) {
+    initializeGame();
+  }
 
 })
 
 
 
-//create a function to select each question and present it
 
 
 /*
