@@ -1,48 +1,42 @@
+
   //load stuff
 $(document).ready(function() {
 
   //establish questions as objects
 let question0 = {
   question: "Who represented Humanity when they made first contact with the Vulcans?",
-  aChoice: "Doctor Zefram Cochrane",
-  bChoice: "Colonel Phillip Green",
-  cChoice: "Doctor Henry Archer",
-  dChoice: "Doctor Emory Erickson",
+  choice: ["Doctor Zefram Cochrane", "Colonel Phillip Green", "Doctor Henry Archer", "Doctor Emory Erickson"],
+  correctButton: "aChoice",
   correct: "aChoice"
 }; 
 
 let question1 = {
   question: "Which Human was key to arranging an alliance between the Vulcans and the Andorians?",
-  aChoice: "Admiral Maxwell Forrest",
-  bChoice: "Captain Jonathan Beckett Archer",
-  cChoice: "Captain Jean-Luc Picard",
-  dChoice: "Captain Erika Hernandez",
+  choice: ["Admiral Maxwell Forrest", "Captain Jonathan Beckett Archer", "Captain Jean-Luc Picard", "Captain Erika Hernandez"],
   correct: "bChoice"
 }; 
 
 let question2 = {
   question: "What year was the United Federation of Planets founded in?",
-  aChoice: "2161 CE",
-  bChoice: "2155 CE",
-  cChoice: "2063 CE",
-  dChoice: "2256 CE",
+  choice: ["2161 CE", "2155 CE", "2063 CE", "2256 CE"],
   correct: "aChoice"
 }; 
 
 let question3 = {
   question: "What battle started the first Federation-Klingon war?",
-  aChoice: "Battle of Vulcanis",
-  bChoice: "Battle of Organia",
-  cChoice: "Battle of T'Kuvma",
-  dChoice: "Battle of the Binary Stars",
+  choice: ["Battle of Vulcanis", "Battle of Organia", "Battle of T'Kuvma", "Battle of the Binary Stars"],
   correct: "dChoice"
 }; 
 
+//** REST OF QUESTIONS GO HERE
+
   //establish variables
-let allQuestions = [question0, question1, question2, question3];
+let allQuestions = [question0, question1, question2, question3 /*update question list!*/];
 let questionAnswered = false;
 let correctAnswers = 0;
 let wrongAnswers = 0;
+let timeOnTimer = 20;
+let i = -1;
 
   //  Variable that will hold our setInterval that runs the timer
 let intervalId;
@@ -52,8 +46,7 @@ let clockRunning = false;
   //code to start master timer
   // Our timer object
 let timer = {
-  time: 120,
-
+  time: timeOnTimer,
     // Use setInterval to start the count here and set the clock to running.
   start: function() {
       // Use setInterval to start the count here and set the clock to running.
@@ -63,19 +56,23 @@ let timer = {
     }
   },
   stop: function() {
-    // Use clearInterval to stop the count here and set the clock to not be running.
+      // Use clearInterval to stop the count here and set the clock to not be running.
     clearInterval(intervalId);
     clockRunning = false;
   },
   count: function() {
-    // increment time by 1, remember we cant use "this" here.
+      // increment time by 1, remember we cant use "this" here.
     timer.time--;
-    // Get the current time, pass that into the stopwatch.timeConverter function,
-    //       and save the result in a variable.
+      // Get the current time, pass that into the stopwatch.timeConverter function,
+      //       and save the result in a variable.
     let converted = timer.timeConverter(timer.time);
     console.log(converted);
-    // Use the variable we just created to show the converted time in the "display" div.
+      // Use the variable we just created to show the converted time in the "display" div.
     $("#timer").text(converted);
+    if (timer.time === 0) {
+      console.log(timer.time);
+      timesUp();
+    }
   },
   timeConverter: function(t) {
     let minutes = Math.floor(t / 60);
@@ -93,16 +90,29 @@ let timer = {
   }
 };
 
+function timesUp() {
+    console.log('Hello');
+    chosen()
+    $(".status").html("Time is up. Standby for next question.");
+      //code to present 'times up' pic
+    $(".timesup").show();
+      //code to prevent more questions being picked
+    questionAnswered = true;
+    setTimeout(function() {
+      //code to activate next question
+    initializeQuestion();
+      }, 5000);
+}
+
+
+
   //game reset code
 function initializeGame() {
     //code to allow answers to be picked
-  questionAnswered = false;
+  i = -1;
   correctAnswers = 0;
   wrongAnswers = 0;
-  timer.time = 120;
-  $(timer.start);    
-  $("#timer").text("02:00");
-  $(".answer").show();
+  $(".instructions").show();
   $(".score").hide();
   $(".timesup").hide();
   $(".status").hide();
@@ -112,271 +122,131 @@ function initializeGame() {
     intervalId = setInterval(timer.count, 1000);
       clockRunning = true;
     }
-}
+  if (questionAnswered === true) {
+      questionAnswered = false;
+    }
+};
 
-  //start game (over)
-initializeGame();
-
-//**create loop to present each question and answers in turn
-//**create a function to select each question and present it
-
-i=3;
-
+  //question reset code
+function initializeQuestion() {
+    //create a function to select each question and present it
+    //create code to present each question and answers in turn
+  i = i + 1;
+  timer.time = timeOnTimer;
+  console.log(i);   
+  $(".answer").show();
+  $(".answer").prop('disabled', false);
+  $(".timesup").hide();
+  $(".status").hide();
+  $(".failure").hide();
+  $(".success").hide();
+  $("#timer").text("00:30");
+  if (!clockRunning) {
+    intervalId = setInterval(timer.count, 1000);
+      clockRunning = true;
+    }
+  $(timer.start);    
+  if (questionAnswered === true) {
+      questionAnswered = false;
+    }
+    //code to allow answers to be picked
   currentQuestion = allQuestions[i].question;
     console.log(currentQuestion);
   $("#question").html(currentQuestion);
-  currentAChoice = allQuestions[i].aChoice;
+  currentAChoice = allQuestions[i].choice[0];
     console.log(currentAChoice);
   $("#aChoice").html(currentAChoice);
-  currentBChoice = allQuestions[i].bChoice;
+  currentBChoice = allQuestions[i].choice[1];
     console.log(currentBChoice);
   $("#bChoice").html(currentBChoice);
-  currentCChoice = allQuestions[i].cChoice;
+  currentCChoice = allQuestions[i].choice[2];
     console.log(currentCChoice);
   $("#cChoice").html(currentCChoice);
-  currentDChoice = allQuestions[i].dChoice;
+  currentDChoice = allQuestions[i].choice[3];
     console.log(currentDChoice);
   $("#dChoice").html(currentDChoice);
-
   correctChoice = allQuestions[i].correct;
-  console.log(correctChoice);
+    console.log(correctChoice);
+};
+
+function chosen() {
+    //stops timer
+  $(timer.stop);    
+  clockRunning = false;
+    //code to prevent more questions being picked
+  $(".answer").prop('disabled', true);
+    //hide other answers
+  $(".answer").hide();
+    //show correct answer
+  $("[value='"+ correctChoice +"']").show();
+    //show result info
+  $(".status").show();
+    //code to show score
+  $(".score").show();
+    console.log(correctAnswers);
+    console.log(wrongAnswers);
+    let percent = correctAnswers*100/(correctAnswers + wrongAnswers);
+    console.log(percent)
+  $(".score").html("Correct Answers: " + correctAnswers + "<br>Incorrect Answers: " + wrongAnswers "<br> Percentage Correct: " + percent);
+};
+
+  //start game (over)
+initializeGame();
+initializeQuestion();
 
 $('.answer').bind('click', function (evt) {
-    $(".timesup").hide();
-    $(".status").hide();
-    $(".failure").hide();
-    $(".success").hide();
-    clockRunning = true;
-    //$(timer.start);    
 
-//if (questionAnswered = false) {
-  if ($(this).val() === correctChoice) {
-    console.log("Correct!");
+    if ($(this).val() === correctChoice) {
+      console.log("Correct!");
+      correctAnswers = correctAnswers +1;
+      chosen();
+      $(".status").html("Correct! A Starfleet Officer's first duty is to the truth!");
+      $(".success").show();
+      questionAnswered = true;
+      console.log(questionAnswered);
 
-    $(timer.stop);    
-
-    clockRunning = false;
-    correctAnswers = correctAnswers +1;
-    $(".status").html("Correct! A Starfleet Officer's first duty is to the truth!");
-    $(".success").show();
-      //code to prevent more questions being picked
-    questionAnswered = true;
-
-    //code for duration
-    //code to activate next question
-  }
-  else {
-    wrongAnswers = wrongAnswers +1;
-    console.log("loser!");
-    $(timer.stop);    
-    clockRunning = false;
-    $(".answer").hide();
-    if ($(".answer").val() === correctChoice) {
 
     }
-
-    $(".status").html("Wrong! Insufficient facts always invite danger.");
-    $(".failure").show();
-      //code to prevent more questions being picked
-    questionAnswered = true;
-
-    //code for duration
-    //code to activate next question
-  }
-  //code to end slide if question isn't answered.  
-      //code to prevent more questions being picked
-    questionAnswered = true;
-    $(timer.stop);
-    clockRunning = false;
-    //code to present 'times up' pic
-      $(".timesup").show();
-      //"Time is the fire in which we burn."
-    //code for duration
-    //code to start next question.  
-
-
-  //code to show final score when all questions have been dealt with.
-    $(".score").show();
-    $(".timesup").hide();
-    $(".status").hide();
-    $(".failure").hide();
-    $(".success").hide();
-
-  console.log(correctAnswers);
-  console.log(wrongAnswers);
-    $(".score").html("Correct Answers: " + correctAnswers + "<br>Wrong Answers: " + wrongAnswers);
-
-  //code to reset game
-  document.onkeyup = function(event) {
-    initializeGame();
-  }
-
-})
-
-
-
-
-
-/*
-function nextQuestion () {
-  let randomQuestion = Math.floor(Math.random() * (allQuestions.length));
-  document.getElementById("question").innerHTML = alliance[randomQuestion];
-}
-
-
-*/
-
-// create code to present Success pic or Failure pic and advance to next question
-//create timer for each question
-//create core to present 'out of time' if that event occurs
-
-
-
-/*
-    $(".sabrepic").hide();
-    $(".sabrebroke").hide();
-    $(".unbuilt").show();
-    $("figure").show();
-
-    //The random target number should be between 19 - 120.
-  let targetMin = 19;
-  let targetMax = 120;
-
-    //Each crystal should have a random hidden value between 1 - 12.
-  let crystalMin = 1;
-  let crystalMax = 12;
-
-  let targetNumber;
-  let adeganNumber;
-  let jedhaNumber;
-  let ilumNumber;
-  let ruusanNumber;
-  let currentNumber = 0;
-  let sabresBuilt = 0;
-  let sabreTrys = 0;
-
-  function random(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
-  }
-
-    //The game restarts whenever the player wins or loses. (do not refresh the page as a means to restart the game.)
-    // The target number and current number should both reset, but the total wins and loses should remain.
-  function initializeGame() {
-    $(".unbuilt").show();
-    $(".sabrepic").hide();
-    $(".sabrebroke").hide();
-    $("figure").show();
-    $(".status").html("");
-    currentNumber = 0;
-    targetNumber = "";
-    adeganNumber = "";
-    jedhaNumber = "";
-    ilumNumber = "";
-    ruusanNumber = "";
-    $(".target, .current").empty();
-
-      //generate random target number
-    targetNumber = random(targetMin, targetMax);
-    console.log(targetNumber);
-
-      //The player will be shown the random target number at the start of the game.  
-    $(".target").text(targetNumber);
-
-      //generate random values for crystals. game will hide this amount until the player clicks a crystal.
-    adeganNumber = random(crystalMin, crystalMax);
-      console.log(adeganNumber);
-    jedhaNumber = random(crystalMin, crystalMax);
-      console.log(jedhaNumber);
-    ilumNumber = random(crystalMin, crystalMax);
-      console.log(ilumNumber);
-    ruusanNumber = random(crystalMin, crystalMax);
-      console.log(ruusanNumber);
-  };
-
-  initializeGame();
-
-    //When the player clicks on a crystal, it will add a specific amount of points to the player's total score. 
-  $('img').bind('click', function (evt) {
-
-    if (currentNumber < targetNumber) {
-      if($(this).attr('id') == 'adegan') {
-        currentNumber = currentNumber + adeganNumber;
-        console.log(currentNumber);
-      }
-      if($(this).attr('id') == 'jedha') {
-        currentNumber = currentNumber + jedhaNumber;
-        console.log(currentNumber);
-      }
-      if($(this).attr('id') == 'ilum') {
-        currentNumber = currentNumber + ilumNumber;
-        console.log(currentNumber);
-      }
-      if($(this).attr('id') == 'ruusan') {
-        currentNumber = currentNumber + ruusanNumber;
-        console.log(currentNumber);
-      }
-
-        //When they do click one, update the player's score counter.
-      $(".current").text(currentNumber);
-
-      //The player wins if their total score matches the random number from the beginning of the game.
-    if (currentNumber === targetNumber) {
-      console.log("You Win!")
-      sabresBuilt = sabresBuilt +1;
-
-    console.log("Built " + sabresBuilt);
-    //**load a picture of a lit sabre???  
-      $(".unbuilt").hide();
-      $("figure").hide();
-      $(".sabrepic").show();
-      $(".status").html("You have constructed a new lightsabre!")
-        .append("<br><em>Indeed you are powerful as the Emperor has foreseen.<em>")
-        .append("<br>Hit any key to build your next lightsabre.");
-
-        let audioElement = document.createElement("audio");
-          audioElement.setAttribute("src", "assets/sound/sabreon.wav");
-          audioElement.play();
-
-    document.onkeyup = function(event) {
-      initializeGame();
+    else {
+      wrongAnswers = wrongAnswers +1;
+      console.log("loser!");
+      chosen();
+      $(".status").html("Incorrect. See above for correct answer. Insufficient facts always invite danger.");
+        //code for duration
+      $(".failure").show();    
+      questionAnswered = true;
+      console.log(questionAnswered);
     }
 
+  if (questionAnswered === true && i < allQuestions.length -1) {
+        //code for duration
+      setTimeout(function() {
+          //code to activate next question
+        initializeQuestion();
+      }, 5000);
   }
-
-      //The player loses if their score goes above the random number.
-    else if (currentNumber > targetNumber) {
-      console.log("You Lose!")
-      sabreTrys = sabreTrys +1;
-      console.log("Failure" + sabreTrys);
-      $(".unbuilt").hide();
-      $("figure").hide();
-      $(".sabrebroke").show();
-      $(".status").html("The Lightsabre has exploded!")
-        .append("<br><em>The greatest teacher, failure is.<em>")
-        .append("<br>Hit any key to build another lightsabre.");
-
-        //explosion sound FX
-      let audioElement = document.createElement("audio");
-        audioElement.setAttribute("src", "assets/sound/lasrhit4.mp3");
-        audioElement.play();
-
-        //load a picture of a broken sabre???  
+    //code to reset game
+  if (questionAnswered === true && i === allQuestions.length -1) {
+    console.log("GAME OVER");
+    setTimeout(function() {
+      $(".instructions").hide();
+      $("#question").hide();
+      $(".answer").hide();
+      $(".success").hide();  
+      $(".failure").hide();  
+      $(".failure").score();  
+      $(".status").html("Press any key to take the test again.");
       document.onkeyup = function(event) {
         initializeGame();
+        initializeQuestion();
       }
-    }
-
-    //The app should show the number of games the player wins and loses.
-    $(".sabres").text(sabresBuilt);
-    $(".failures").text(sabreTrys);
-
+    }, 5000);
   }
+  })
 })
 
-*/
-}
 
 
-);
+
+
+

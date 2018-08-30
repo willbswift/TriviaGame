@@ -17,7 +17,7 @@
         <h1>History of the United Federation of Planets</h1>
         <section class="instructions">
             <h2>Time Remaining: <span id="timer"></span></h2>
-            <p>____ INSTRUCTIONS _________ Risk is our business</p>
+            <p>____ INSTRUCTIONS _________ "Risk is our business"</p>
         </section>
     </header>
     <main>
@@ -26,20 +26,20 @@
                 <h2 id="question"></h2>
             </section>
             <section class="buttonbox">
-                <button class="answer" value="aChoice" id="aChoice"></button>
+                <button class="answer" data-index="0" value="aChoice" id="aChoice"></button>
                 <br>
-                <button class="answer" value="bChoice" id="bChoice"></button>
+                <button class="answer" data-index="1" value="bChoice" id="bChoice"></button>
                 <br>
-                <button class="answer" value="cChoice" id="cChoice"></button>
+                <button class="answer" data-index="2" value="cChoice" id="cChoice"></button>
                 <br>
-                <button class="answer" value="dChoice" id="dChoice"></button>
+                <button class="answer" data-index="3" value="dChoice" id="dChoice"></button>
             </section>
-            <section class="output">
+                <section class="output">
                 <h2 class="current"></h2>  
                 <h2><div class="status"></div></h2>
-                <div class="success"></div>
-                <div class="failure"></div>
-                <div class="timesup"></div>
+                <div class="success">RIGHT</div>
+                <div class="failure">WRONG</div>
+                <div class="timesup">"Time is the fire in which we burn."</div>
                 <div class="score"></div>
                 <p></p>
             </section>
