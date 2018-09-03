@@ -28,10 +28,17 @@ $(document).ready(function () {
     correct: "dChoice"
   };
 
+  let question4 = {
+    question: "Which starship first successfully used a Displacement-Activated Mycelial Spore Hub Drive?",
+    choice: ["USS Enterprise NCC-1701", "USS Enterprise NCC-1701-D", "USS Discovery NCC-1031", "USS Voyager NCC-74656"],
+    correct: "cChoice"
+  };
+
+
   //** REST OF QUESTIONS GO HERE
 
   //establish variables
-  let allQuestions = [question0, question1, question2, question3 /*update question list!*/];
+  let allQuestions = [question0, question1, question2, question3, question4 /*update question list!*/];
   let currentQuestion;
   let questionAnswered = false;
   let correctAnswers = 0;
@@ -128,13 +135,7 @@ $(document).ready(function () {
     $(".status").hide();
     $(".failure").hide();
     $(".success").hide();
-    if (!clockRunning) {
-      intervalId = setInterval(timer.count, 1000);
-      clockRunning = true;
-    }
-    if (questionAnswered === true) {
-      questionAnswered = false;
-    }
+    $(".timesup").hide(); 
   };
 
   //question reset code
@@ -211,17 +212,34 @@ $(document).ready(function () {
       $(".success").hide();
       $(".failure").hide();
       $(".current").hide();
+      $(".timesup").hide();
       $(".status").html("Press any key to take the test again.");
-      document.onkeyup = function (event) {
-        initializeGame();
-        initializeQuestion();
-      }
+      $(".startgame").html("Start Exam Again");
+      $("#startgame").show();
+      $( "#startgame" ).click(function() {
+          initializeGame();
+          initializeQuestion();
+          $(".startgame").hide();
+        });
     }, 5000);
   }
 
   //start game (over)
-  initializeGame();
-  initializeQuestion();
+  $(".instructions").hide();
+  $(".question").hide();
+  $(".answer").hide();
+  $(".success").hide();
+  $(".failure").hide();
+  $(".current").hide();
+  $(".timesup").hide();
+  $(".status").hide();
+  $(".startgame").html("Start Exam");
+  $("#startgame").show();
+$( "#startgame" ).click(function() {
+      initializeGame();
+      initializeQuestion();
+      $(".startgame").hide();
+    });
 
   $('.answer').bind('click', function (evt) {
 
@@ -233,7 +251,6 @@ $(document).ready(function () {
       $(".success").show();
       questionAnswered = true;
       console.log(questionAnswered);
-
 
     }
     else {
