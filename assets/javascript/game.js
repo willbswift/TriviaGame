@@ -7,13 +7,13 @@ $(document).ready(function () {
     question: "Who represented Humanity when they made first contact with the Vulcans?",
     choice: ["Doctor Zefram Cochrane", "Colonel Phillip Green", "Doctor Henry Archer", "Doctor Emory Erickson"],
     correctButton: "aChoice",
-    correct: "aChoice"
+    correct: "aChoice",
   };
 
   let question1 = {
     question: "Which Human was key to arranging an alliance between the Vulcans and the Andorians?",
     choice: ["Admiral Maxwell Forrest", "Captain Jonathan Beckett Archer", "Captain Jean-Luc Picard", "Captain Erika Hernandez"],
-    correct: "bChoice"
+    correct: "bChoice",
   };
 
   let question2 = {
@@ -34,11 +34,86 @@ $(document).ready(function () {
     correct: "cChoice"
   };
 
+  let question5 = {
+    question: "Which starship captain turned back the Romulan Star Empire’s incursion on stardate 1709.1 (2266 CE)?",
+    choice: ["Captain Gabriel Lorca", "Captain James Tiberius Kirk", "Captain Philippa Georgiou", "Captain Hikaru Walter Sulu"],
+    correct: "bChoice"
+  };
+
+  let question6 = {
+    question: "In which sector were Doctor Carol Marcus’ experiments into the Genesis Effect undertaken?",
+    choice: ["Sector 001", "Bajor Sector", "Gamma Hydra Sector", "Mutara Sector"],
+    correct: "dChoice"
+  };
+
+  let question7 = {
+    question: "Which two starships saved the first Khitomer Conference from being destroyed by political extremists?",
+    choice: ["USS Enterprise NCC-1701-E and USS Defiant NX-74205", "USS Enterprise NCC-1701-A and USS Excelsior NCC-2000", "USS Discovery NCC-1031 and USS Shenzhou NCC-1227", "USS Enterprise NCC-1701 and USS Federation NX-2100" ],
+    correct: "bChoice"
+  };
+
+  let question8 = {
+    question: "As of the 24th century, what is the most massive starship ever constructed by Starfleet?",
+    choice: ["Galaxy Class", "Excelsior Class", "Sovereign Class", "Nebula Class"],
+    correct: "aChoice"
+  };
+
+  let question9 = {
+    question: "Which Starfleet officer led the attack on the Borg at the battle of Wolf 359?",
+    choice: ["Admiral James Tiberius Kirk", "Captain Kathryn M. Janeway", " Admiral J.P. Hanson", "Captain Jean-Luc Picard"],
+    correct: "cChoice"
+  };
+
+    let question10 = {
+    question: "Who was the first Klingon to graduate from Starfleet Academy?",
+    choice: ["B'Elanna Torres of the House of L'Naan", "Worf of the House of Mogh", "J'Dan of the House of House of Duras", "Kurn of the House of Mogh"],
+    correct: "bChoice"
+  };
+
+  let question11 = {
+    question: "Who was the first artificial intelligence to serve as an officer in Starfleet?",
+    choice: ["Data", "Voyager's Emergency Medical Hologram", "M-5 Multitronic Computer Unit", "Ilia"],
+    correct: "aChoice"
+  };
+
+  let question12 = {
+    question: "Which two Starfleet officers discovered the Bajoran Wormhole?",
+    choice: ["Benjamin Lafayette Sisko and Jadzia Dax", "Jadzia Dax and Julian Subatoi Bashir", "Julian Subatoi Bashir and Miles Edward O'Brien", "Data and Geordi La Forge"],
+    correct: "bChoice"
+  };
+
+  let question13 = {
+    question: "The Alliance against the Dominion consisted of the Federation, the Klingon Empire, and which other major space power?",
+    choice: ["The Breen Confederacy", "The Cardassian Union", "The Romulan Star Empire", "The Son'a Solidarity"],
+    correct: "cChoice"
+  };
+
+  let question14 = {
+    question: "Which Starflet officer defied orders to reveal the Starfleet/Son’a scandal to the Federation Council?",
+    choice: ["Captain Benjamin Lafayette Sisko", "Admiral Matthew Dougherty", "Captain Kathryn M. Janeway", "Commander William Thomas Riker"],
+    correct: "dChoice"
+  };
+
+  let question15 = {
+    question: "Which starship was responsible for stopping Praetor Shinzon from starting a war between the Romulan Star Empire and the United Federation of Planets?",
+    choice: ["USS Defiant NX-74205", "USS Enterprise NCC-1701-A", "USS Enterprise NCC-1701-D", "USS Enterprise NCC-1701-E"],
+    correct: "dChoice"
+  };
+
+  let question16 = {
+    question: "Which Federation Ambassador was lost in a temporal rift while trying to save Romulus and Remus from destruction by the Hobus Supernova?",
+    choice: ["Ambassador Lwaxana Troi", "Ambassador Sarek", "Ambassador Spock", "Lieutenant Commander Data"],
+    correct: "cChoice"
+  };
+
+
+
+
 
   //** REST OF QUESTIONS GO HERE
 
   //establish variables
-  let allQuestions = [question0, question1, question2, question3, question4 /*update question list!*/];
+  let allQuestions = [question0, question1, question2, question3, question4, question5, question6, question7, question8, question9, question10, question11, question12, question13, question14, question15, question16 /*update question list!*/];
   let currentQuestion;
   let questionAnswered = false;
   let correctAnswers = 0;
@@ -196,7 +271,7 @@ $(document).ready(function () {
     $(".score").show();
     console.log(correctAnswers);
     console.log(wrongAnswers);
-    percent = correctAnswers * 100 / (correctAnswers + wrongAnswers);
+    percent = Math.round(correctAnswers * 100 / (correctAnswers + wrongAnswers));
     console.log(percent)
     $(".score1").html("Correct Answers: " + correctAnswers);
     $(".score2").html("Incorrect Answers: " + wrongAnswers);
@@ -213,7 +288,7 @@ $(document).ready(function () {
       $(".failure").hide();
       $(".current").hide();
       $(".timesup").hide();
-      $(".status").html("Press any key to take the test again.");
+      $(".status").hide();
       $(".startgame").html("Start Exam Again");
       $("#startgame").show();
       $( "#startgame" ).click(function() {
