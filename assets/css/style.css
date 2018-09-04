@@ -45,6 +45,7 @@ p {
 }
 
 .instructions {
+	float: left;
 	text-align: left;
 	margin: .5rem;
 }
@@ -69,27 +70,28 @@ main {
 
 button {
 	height: 2.7rem;
-	width: 30rem;
+	width: 24rem;
 	background-color: #FE9800;
 	-webkit-border-radius: 1.35rem;
   	-moz-border-radius: 1.35rem;
   	border-radius: 1.35rem;
   	border: none;
-  	text-align: right;
+  	/*text-align: right;*/
   	text-transform: uppercase;
   	margin: .35rem;
 }
 
 #startgame {
-	text-align: center;
 	width: 8rem;
+	margin-top: 5.5rem;
 }
 
 .question {
 	text-align: left;
 	margin: .5rem;
-	padding-top: .5rem;
+	padding-top: 1.2rem;
 	padding-right: .2rem;
+	color: #F8FBDB;
 }
 
 .buttonbox {
@@ -97,15 +99,63 @@ button {
 	text-align: right;
 }
 
+.buttonbox .answer {
+	padding-right: 1rem;
+}
+
+#aChoice {
+	background-color: #9B98FE;
+}
+
+#bChoice {
+	background-color: #FE9800;
+}
+
+#cChoice {
+	background-color: #F8FBDB;
+}
+
+#dChoice {
+	background-color: #CC6061;
+}
+
 img {
-	height: 200px;
-	width: auto;
-	text-align: center;
+	width: 15rem;
+	height: auto;
+	margin-left: .5rem;
 }
 
 .seal {
-	height: 5rem;
-	width: auto;
+	float: left;
+}
+
+.success {
+	float: left;
+}
+
+.failure {
+	float: left;
+}
+
+.status {
+	text-align: right;
+}
+
+.timesup img {
+	width: 35rem;
+	height : auto;
+}
+
+.status p {
+	text-align: right;
+}
+
+.score {
+	color: #F8FBDB;
+	font-weight: normal;
+	text-align: right;
+	margin-top: 0;
+	margin-right: 1rem;
 }
 
 article {

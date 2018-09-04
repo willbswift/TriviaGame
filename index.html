@@ -22,40 +22,39 @@
         <section class="instructions1">
             <p>Welcome to the Starfleet Academy's final exam for the History of the United Federation of Planets Course. Please select the correct answer for each question, and remember the words of Admiral Kirk: "Risk is our business"</p>
         </section>
+        <div class="score">
+            <div class="score1"></div>
+            <div class="score2"></div>
+            <div class="score3"></div>
+        </div>
     </header>
     <main>
         <article>
-            <button class="startgame" value="startgame" id="startgame"></button>
             <section>
                 <h2><div class="question"></div></h2>
             </section>
+            <div class="seal">
+                <img src="assets/images/seal.png">
+            </div>
+            <div class="success">
+                <img src="assets/images/success.gif">
+            </div>
+            <div class="failure">
+                <img src="assets/images/failure.gif">
+            </div>
             <section class="buttonbox">
                 <button class="answer" data-index="0" value="aChoice" id="aChoice"></button>
                 <button class="answer" data-index="1" value="bChoice" id="bChoice"></button>
                 <button class="answer" data-index="2" value="cChoice" id="cChoice"></button>
                 <button class="answer" data-index="3" value="dChoice" id="dChoice"></button>
             </section>
-                <section class="output">
-                <h2 class="current"></h2>  
-                <h2><div class="status"></div></h2>
-                <div class="success">
-                    <img src="assets/images/success.gif">
-                </div>
-                <div class="failure">
-                    <img src="assets/images/failure.gif">
-                </div>
-                <div class="timesup">
-                    <img src="assets/images/timesup.gif">
-                </div>
-                <div class="score">
-                    <div class="score1"></div>
-                    <div class="score2"></div>
-                    <div class="score3"></div>
-                </div>
-                <div class="seal">
-                    <img src="assets/images/seal.png">
-                </div>
+            <section class="output">
+                <div class="status"></div>
             </section>
+            <div class="timesup">
+                <img src="assets/images/timesup.gif">
+            </div>
+            <button class="startgame" value="startgame" id="startgame"></button>
       </article>
     </main>
 

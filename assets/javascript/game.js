@@ -85,7 +85,7 @@ $(document).ready(function () {
   let question13 = {
     question: "Which two Starfleet officers discovered the Bajoran Wormhole?",
     choice: ["Benjamin Lafayette Sisko and Jadzia Dax", "Jadzia Dax and Julian Subatoi Bashir", "Julian Subatoi Bashir and Miles Edward O'Brien", "Data and Geordi La Forge"],
-    correct: "bChoice"
+    correct: "aChoice"
   };
 
   let question14 = {
@@ -124,7 +124,7 @@ $(document).ready(function () {
   let questionAnswered = false;
   let correctAnswers = 0;
   let wrongAnswers = 0;
-  let timeOnTimer = 20;
+  let timeOnTimer = 30;
   let i = -1;
   let percent;
 
@@ -210,6 +210,7 @@ function shuffle(array) {
     console.log('Hello');
     wrongAnswers = wrongAnswers + 1;
     chosen()
+    $(".seal").hide();
     $(".status").html("Time has expired - Time is the fire in which we burn.");
     //code to present 'times up' pic
     $(".timesup").show();
@@ -238,12 +239,13 @@ function shuffle(array) {
     $(".question").show();
     $(".instructions").show();
     $(".instructions1").hide();
-    $(".score").hide();
     $(".timesup").hide();
     $(".status").hide();
     $(".failure").hide();
     $(".success").hide();
     $(".timesup").hide(); 
+      //shuffle questions
+    allQuestions = shuffle(allQuestions);
   };
 
   //question reset code
@@ -254,6 +256,9 @@ function shuffle(array) {
     timer.time = timeOnTimer;
     console.log(i);
     $(".answer").show();
+    $(".score").show();
+    $(".score1").html("Correct Answers: " + correctAnswers);
+    $(".score2").html("Incorrect Answers: " + wrongAnswers);
     $(".answer").prop('disabled', false);
     $(".timesup").hide();
     $(".status").hide();
@@ -269,8 +274,6 @@ function shuffle(array) {
       questionAnswered = false;
     }
     $(".seal").show();
-      //shuffle questions
-    allQuestions = shuffle(allQuestions);
       //code to allow answers to be picked
     currentQuestion = allQuestions[i].question;
     console.log(currentQuestion);
@@ -359,7 +362,8 @@ function shuffle(array) {
       console.log("Correct!");
       correctAnswers = correctAnswers + 1;
       chosen();
-      $(".status").html("Correct! A Starfleet Officer's first duty is to the truth!");
+      $(".status").html("<h2>Correct!</h2>").append("<p>A Starfleet Officer's first duty is to the truth!</p>");
+      $(".seal").hide();
       $(".success").show();
       questionAnswered = true;
       console.log(questionAnswered);
@@ -371,8 +375,9 @@ function shuffle(array) {
       wrongAnswers = wrongAnswers + 1;
       console.log("loser!");
       chosen();
-      $(".status").html("Incorrect. See above for correct answer. Insufficient facts always invite danger.");
+      $(".status").html("<h2>Incorrect. See above for correct answer.</h2>").append("<p>Insufficient facts always invite danger.</p>");
       //code for duration
+      $(".seal").hide();
       $(".failure").show();
       questionAnswered = true;
       console.log(questionAnswered);
