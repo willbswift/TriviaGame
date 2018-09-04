@@ -48,7 +48,7 @@ $(document).ready(function () {
 
   let question7 = {
     question: "Which two starships saved the first Khitomer Conference from being destroyed by political extremists?",
-    choice: ["USS Enterprise NCC-1701-E and USS Defiant NX-74205", "USS Enterprise NCC-1701-A and USS Excelsior NCC-2000", "USS Discovery NCC-1031 and USS Shenzhou NCC-1227", "USS Enterprise NCC-1701 and USS Federation NX-2100" ],
+    choice: ["USS Enterprise NCC-1701-E and USS Defiant NX-74205", "USS Enterprise NCC-1701-A and USS Excelsior NCC-2000", "USS Discovery NCC-1031 and USS Shenzhou NCC-1227", "USS Enterprise NCC-1701 and USS Federation NX-2100"],
     correct: "bChoice"
   };
 
@@ -64,7 +64,7 @@ $(document).ready(function () {
     correct: "cChoice"
   };
 
-    let question10 = {
+  let question10 = {
     question: "Who was the first Klingon to graduate from Starfleet Academy?",
     choice: ["B'Elanna Torres of the House of L'Naan", "Worf of the House of Mogh", "J'Dan of the House of House of Duras", "Kurn of the House of Mogh"],
     correct: "bChoice"
@@ -128,20 +128,20 @@ $(document).ready(function () {
   let i = -1;
   let percent;
 
-function shuffle(array) {
-  let currentIndex = array.length, temporaryValue, randomIndex;
+  function shuffle(array) {
+    let currentIndex = array.length, temporaryValue, randomIndex;
     // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
+    while (0 !== currentIndex) {
       // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
       // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+    return array;
   }
-  return array;
-}
 
   //  Variable that will hold our setInterval that runs the timer
   let intervalId;
@@ -160,8 +160,8 @@ function shuffle(array) {
         clockRunning = true;
       }
       let audioElement = document.createElement("audio");
-        audioElement.setAttribute("src", "assets/sound/newquestion.wav");
-        audioElement.play();
+      audioElement.setAttribute("src", "assets/sound/newquestion.wav");
+      audioElement.play();
     },
     stop: function () {
       // Use clearInterval to stop the count here and set the clock to not be running.
@@ -178,7 +178,7 @@ function shuffle(array) {
       // Use the variable we just created to show the converted time in the "display" div.
       $("#timer").text(converted);
       if (timer.time === 5) {
-      let audioElement = document.createElement("audio");
+        let audioElement = document.createElement("audio");
         audioElement.setAttribute("src", "assets/sound/fivesec.wav");
         audioElement.play();
       }
@@ -186,8 +186,8 @@ function shuffle(array) {
         console.log(timer.time);
         timesUp();
         let audioElement = document.createElement("audio");
-          audioElement.setAttribute("src", "assets/sound/button2.wav");
-          audioElement.play();
+        audioElement.setAttribute("src", "assets/sound/button2.wav");
+        audioElement.play();
       }
     },
     timeConverter: function (t) {
@@ -243,8 +243,8 @@ function shuffle(array) {
     $(".status").hide();
     $(".failure").hide();
     $(".success").hide();
-    $(".timesup").hide(); 
-      //shuffle questions
+    $(".timesup").hide();
+    //shuffle questions
     allQuestions = shuffle(allQuestions);
   };
 
@@ -274,7 +274,7 @@ function shuffle(array) {
       questionAnswered = false;
     }
     $(".seal").show();
-      //code to allow answers to be picked
+    //code to allow answers to be picked
     currentQuestion = allQuestions[i].question;
     console.log(currentQuestion);
     $(".question").html(currentQuestion);
@@ -330,11 +330,11 @@ function shuffle(array) {
       $(".status").hide();
       $(".startgame").html("Start Exam Again");
       $("#startgame").show();
-      $( "#startgame" ).click(function() {
-          initializeGame();
-          initializeQuestion();
-          $(".startgame").hide();
-        });
+      $("#startgame").click(function () {
+        initializeGame();
+        initializeQuestion();
+        $(".startgame").hide();
+      });
     }, 5000);
   }
 
@@ -350,11 +350,11 @@ function shuffle(array) {
   $(".instructions1").show();
   $(".startgame").html("Start Exam");
   $("#startgame").show();
-  $( "#startgame" ).click(function() {
-      initializeGame();
-      initializeQuestion();
-      $(".startgame").hide();
-    });
+  $("#startgame").click(function () {
+    initializeGame();
+    initializeQuestion();
+    $(".startgame").hide();
+  });
 
   $('.answer').bind('click', function (evt) {
 
@@ -368,8 +368,8 @@ function shuffle(array) {
       questionAnswered = true;
       console.log(questionAnswered);
       let audioElement = document.createElement("audio");
-        audioElement.setAttribute("src", "assets/sound/button.wav");
-        audioElement.play();
+      audioElement.setAttribute("src", "assets/sound/button.wav");
+      audioElement.play();
     }
     else {
       wrongAnswers = wrongAnswers + 1;
@@ -382,8 +382,8 @@ function shuffle(array) {
       questionAnswered = true;
       console.log(questionAnswered);
       let audioElement = document.createElement("audio");
-        audioElement.setAttribute("src", "assets/sound/button3.mp3");
-        audioElement.play();
+      audioElement.setAttribute("src", "assets/sound/button3.mp3");
+      audioElement.play();
     }
 
     if (questionAnswered === true && i < allQuestions.length - 1) {
