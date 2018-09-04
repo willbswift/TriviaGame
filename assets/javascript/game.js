@@ -160,7 +160,7 @@ $(document).ready(function () {
         clockRunning = true;
       }
       let audioElement = document.createElement("audio");
-      audioElement.setAttribute("src", "assets/sound/newquestion.wav");
+      audioElement.setAttribute("src", "assets/sound/newquestion.mp3");
       audioElement.play();
     },
     stop: function () {
@@ -179,14 +179,14 @@ $(document).ready(function () {
       $("#timer").text(converted);
       if (timer.time === 5) {
         let audioElement = document.createElement("audio");
-        audioElement.setAttribute("src", "assets/sound/fivesec.wav");
+        audioElement.setAttribute("src", "assets/sound/fivesec.mp3");
         audioElement.play();
       }
       if (timer.time === 0) {
         console.log(timer.time);
         timesUp();
         let audioElement = document.createElement("audio");
-        audioElement.setAttribute("src", "assets/sound/button2.wav");
+        audioElement.setAttribute("src", "assets/sound/button2.mp3");
         audioElement.play();
       }
     },
@@ -368,7 +368,7 @@ $(document).ready(function () {
       questionAnswered = true;
       console.log(questionAnswered);
       let audioElement = document.createElement("audio");
-      audioElement.setAttribute("src", "assets/sound/button.wav");
+      audioElement.setAttribute("src", "assets/sound/button.mp3");
       audioElement.play();
     }
     else {
