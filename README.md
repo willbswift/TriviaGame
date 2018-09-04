@@ -10,7 +10,7 @@ The game has built in instructions and is designed to be very simple for the pla
 I added several sound effects [including a warning tone would signal when time was almost out] and some pictures and gifs.  
 
 To play simply load the html file on your browser of choice.  Here’s the link...
-https://willbswift.github.io/unit-4-game/index.html
+https://willbswift.github.io/TriviaGame/
 
 Use your mouse to start the game and select the correct answer. 
 
