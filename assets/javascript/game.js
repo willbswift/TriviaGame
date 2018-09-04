@@ -77,30 +77,36 @@ $(document).ready(function () {
   };
 
   let question12 = {
+    question: "Which Federation starship was the first to explore the Delta Quadrant? ",
+    choice: ["USS Voyager NCC-74656", "USS Defiant NX-74205", "USS Enterprise NCC-1701-D", "USS Stargazer NCC-2893"],
+    correct: "aChoice"
+  };
+
+  let question13 = {
     question: "Which two Starfleet officers discovered the Bajoran Wormhole?",
     choice: ["Benjamin Lafayette Sisko and Jadzia Dax", "Jadzia Dax and Julian Subatoi Bashir", "Julian Subatoi Bashir and Miles Edward O'Brien", "Data and Geordi La Forge"],
     correct: "bChoice"
   };
 
-  let question13 = {
+  let question14 = {
     question: "The Alliance against the Dominion consisted of the Federation, the Klingon Empire, and which other major space power?",
     choice: ["The Breen Confederacy", "The Cardassian Union", "The Romulan Star Empire", "The Son'a Solidarity"],
     correct: "cChoice"
   };
 
-  let question14 = {
+  let question15 = {
     question: "Which Starflet officer defied orders to reveal the Starfleet/Son’a scandal to the Federation Council?",
     choice: ["Captain Benjamin Lafayette Sisko", "Admiral Matthew Dougherty", "Captain Kathryn M. Janeway", "Commander William Thomas Riker"],
     correct: "dChoice"
   };
 
-  let question15 = {
+  let question16 = {
     question: "Which starship was responsible for stopping Praetor Shinzon from starting a war between the Romulan Star Empire and the United Federation of Planets?",
     choice: ["USS Defiant NX-74205", "USS Enterprise NCC-1701-A", "USS Enterprise NCC-1701-D", "USS Enterprise NCC-1701-E"],
     correct: "dChoice"
   };
 
-  let question16 = {
+  let question17 = {
     question: "Which Federation Ambassador was lost in a temporal rift while trying to save Romulus and Remus from destruction by the Hobus Supernova?",
     choice: ["Ambassador Lwaxana Troi", "Ambassador Sarek", "Ambassador Spock", "Lieutenant Commander Data"],
     correct: "cChoice"
@@ -113,7 +119,7 @@ $(document).ready(function () {
   //** REST OF QUESTIONS GO HERE
 
   //establish variables
-  let allQuestions = [question0, question1, question2, question3, question4, question5, question6, question7, question8, question9, question10, question11, question12, question13, question14, question15, question16 /*update question list!*/];
+  let allQuestions = [question0, question1, question2, question3, question4, question5, question6, question7, question8, question9, question10, question11, question12, question13, question14, question15, question16, question17/*update question list!*/];
   let currentQuestion;
   let questionAnswered = false;
   let correctAnswers = 0;
@@ -121,6 +127,21 @@ $(document).ready(function () {
   let timeOnTimer = 20;
   let i = -1;
   let percent;
+
+function shuffle(array) {
+  let currentIndex = array.length, temporaryValue, randomIndex;
+    // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+      // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+      // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+  return array;
+}
 
   //  Variable that will hold our setInterval that runs the timer
   let intervalId;
@@ -138,6 +159,9 @@ $(document).ready(function () {
         intervalId = setInterval(timer.count, 1000);
         clockRunning = true;
       }
+      let audioElement = document.createElement("audio");
+        audioElement.setAttribute("src", "assets/sound/newquestion.wav");
+        audioElement.play();
     },
     stop: function () {
       // Use clearInterval to stop the count here and set the clock to not be running.
@@ -153,9 +177,17 @@ $(document).ready(function () {
       console.log(converted);
       // Use the variable we just created to show the converted time in the "display" div.
       $("#timer").text(converted);
+      if (timer.time === 5) {
+      let audioElement = document.createElement("audio");
+        audioElement.setAttribute("src", "assets/sound/fivesec.wav");
+        audioElement.play();
+      }
       if (timer.time === 0) {
         console.log(timer.time);
         timesUp();
+        let audioElement = document.createElement("audio");
+          audioElement.setAttribute("src", "assets/sound/button2.wav");
+          audioElement.play();
       }
     },
     timeConverter: function (t) {
@@ -178,7 +210,7 @@ $(document).ready(function () {
     console.log('Hello');
     wrongAnswers = wrongAnswers + 1;
     chosen()
-    $(".status").html("Time has expired");
+    $(".status").html("Time has expired - Time is the fire in which we burn.");
     //code to present 'times up' pic
     $(".timesup").show();
     //code to prevent more questions being picked
@@ -205,6 +237,7 @@ $(document).ready(function () {
     wrongAnswers = 0;
     $(".question").show();
     $(".instructions").show();
+    $(".instructions1").hide();
     $(".score").hide();
     $(".timesup").hide();
     $(".status").hide();
@@ -235,7 +268,10 @@ $(document).ready(function () {
     if (questionAnswered === true) {
       questionAnswered = false;
     }
-    //code to allow answers to be picked
+    $(".seal").show();
+      //shuffle questions
+    allQuestions = shuffle(allQuestions);
+      //code to allow answers to be picked
     currentQuestion = allQuestions[i].question;
     console.log(currentQuestion);
     $(".question").html(currentQuestion);
@@ -308,9 +344,10 @@ $(document).ready(function () {
   $(".current").hide();
   $(".timesup").hide();
   $(".status").hide();
+  $(".instructions1").show();
   $(".startgame").html("Start Exam");
   $("#startgame").show();
-$( "#startgame" ).click(function() {
+  $( "#startgame" ).click(function() {
       initializeGame();
       initializeQuestion();
       $(".startgame").hide();
@@ -326,7 +363,9 @@ $( "#startgame" ).click(function() {
       $(".success").show();
       questionAnswered = true;
       console.log(questionAnswered);
-
+      let audioElement = document.createElement("audio");
+        audioElement.setAttribute("src", "assets/sound/button.wav");
+        audioElement.play();
     }
     else {
       wrongAnswers = wrongAnswers + 1;
@@ -337,6 +376,9 @@ $( "#startgame" ).click(function() {
       $(".failure").show();
       questionAnswered = true;
       console.log(questionAnswered);
+      let audioElement = document.createElement("audio");
+        audioElement.setAttribute("src", "assets/sound/button3.mp3");
+        audioElement.play();
     }
 
     if (questionAnswered === true && i < allQuestions.length - 1) {

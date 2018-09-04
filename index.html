@@ -9,45 +9,52 @@
     <link href="assets/css/style.css" type="text/css" rel="stylesheet">
       <!-- Added link to the jQuery Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet"> 
     <title>Star Trek Trivia</title>
 </head>
 
 <body>
     <header>
-        <h1>History of the United Federation of Planets</h1>
+        <h1>UFP History 247 Final Exam</h1>
         <section class="instructions">
             <h2>Time Remaining: <span id="timer"></span></h2>
-            <p>____ INSTRUCTIONS _________ "Risk is our business"</p>
+        </section>
+        <section class="instructions1">
+            <p>Welcome to the Starfleet Academy's final exam for the History of the United Federation of Planets Course. Please select the correct answer for each question, and remember the words of Admiral Kirk: "Risk is our business"</p>
         </section>
     </header>
     <main>
         <article>
+            <button class="startgame" value="startgame" id="startgame"></button>
             <section>
                 <h2><div class="question"></div></h2>
             </section>
             <section class="buttonbox">
-                <button class="startgame" value="startgame" id="startgame"></button>
-                <br>
                 <button class="answer" data-index="0" value="aChoice" id="aChoice"></button>
-                <br>
                 <button class="answer" data-index="1" value="bChoice" id="bChoice"></button>
-                <br>
                 <button class="answer" data-index="2" value="cChoice" id="cChoice"></button>
-                <br>
                 <button class="answer" data-index="3" value="dChoice" id="dChoice"></button>
             </section>
                 <section class="output">
                 <h2 class="current"></h2>  
                 <h2><div class="status"></div></h2>
-                <div class="success">RIGHT</div>
-                <div class="failure">WRONG</div>
-                <div class="timesup">"Time is the fire in which we burn."</div>
+                <div class="success">
+                    <img src="assets/images/success.gif">
+                </div>
+                <div class="failure">
+                    <img src="assets/images/failure.gif">
+                </div>
+                <div class="timesup">
+                    <img src="assets/images/timesup.gif">
+                </div>
                 <div class="score">
                     <div class="score1"></div>
                     <div class="score2"></div>
                     <div class="score3"></div>
                 </div>
-                <p></p>
+                <div class="seal">
+                    <img src="assets/images/seal.png">
+                </div>
             </section>
       </article>
     </main>

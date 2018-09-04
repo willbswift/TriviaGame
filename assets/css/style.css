@@ -4,12 +4,9 @@ html {
     background-size: 1280px, auto;
     background-position: top;
   	background-repeat: no-repeat;
-  	margin-top: 0rem;
-	color: white;
-	font-family: arial, sans-serif;
+	font-family: 'Anton', arial, sans-serif;
 	font-size: 1.2rem;
-	font-weight: bolder;
-	text-shadow: 0 0 5px black;
+	font-weight: normal;
 }
 
 * {
@@ -25,52 +22,90 @@ body {
 }
 
 header {
-	margin-top: 5rem;
-	margin-bottom: 5px;
+	width: 685px;
+	margin-top: 5.4rem;
+	padding-right: .2rem;
+	text-align: center;
 }
 h1 {
+	color: #9B98FE;
+	margin: .5rem;
+	font-size: 1.9rem;
+	font-weight: normal;
+	text-transform: uppercase;
+	text-align: left;
+}
+
+p {
+	color: #F8FBDB;
+	font-weight: normal;
+	text-align: left;
+	margin-top: 0;
+	margin-left: .5rem;
+}
+
+.instructions {
+	text-align: left;
 	margin: .5rem;
 }
 
+
 h2 {
+	color: #FE9800;
+	font-weight: normal;
+	text-transform: uppercase;
+	margin: 0rem;
+}
+
+#timer {
+	color: #F8FBDB;
+}
+
+main {
+	width: 800px;
+	margin-top: 4.5rem;
+	text-align: center;
+}
+
+button {
+	height: 2.7rem;
+	width: 30rem;
+	background-color: #FE9800;
+	-webkit-border-radius: 1.35rem;
+  	-moz-border-radius: 1.35rem;
+  	border-radius: 1.35rem;
+  	border: none;
+  	text-align: right;
+  	text-transform: uppercase;
+  	margin: .35rem;
+}
+
+#startgame {
+	text-align: center;
+	width: 8rem;
+}
+
+.question {
+	text-align: left;
 	margin: .5rem;
+	padding-top: .5rem;
+	padding-right: .2rem;
+}
+
+.buttonbox {
+	padding-right: .2rem;
+	text-align: right;
 }
 
 img {
 	height: 200px;
 	width: auto;
-	border: solid 4px #91FBFD;
-	border-radius: 20px;
-}
-.crystal {
-	height: 200px;
-	width: 100px;
-	border: solid 4px #91FBFD;
-	border-radius: 20px;
+	text-align: center;
 }
 
-main {
-
-}
-
-.sabrepic {
-	background-image: url("../images/sabrebuild.gif"); 
-	height: 20rem;
+.seal {
+	height: 5rem;
 	width: auto;
-	padding-top: 4rem;
-	font-size: 1.2rem;
-	background-repeat: no-repeat;
-	background-position: center; 
-}
-
-.sabrebroke {
-	background-image: url("../images/sabrebroke.png"); 
-	height: 20rem;
-	width: auto;
-	padding-top: 4rem;
-	font-size: 1.2rem;
-	background-repeat: no-repeat;
-	background-position: center; 
 }
 
 article {
@@ -78,11 +113,7 @@ article {
 }
 
 
-.instructions {
-	background-color: #33928D;
-	border: solid 4px #91FBFD;
-	border-radius: 20px;
-}
+
 
 
 
